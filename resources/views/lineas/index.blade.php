@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Sedes')
+@section('title', 'Líneas')
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4><i class="bi bi-building me-2"></i>Sedes</h4>
-    <a href="{{ route('sedes.create') }}" class="btn btn-primary btn-sm">
-        <i class="bi bi-plus-lg me-1"></i>Nueva sede
+    <h4><i class="bi bi-diagram-2 me-2"></i>Líneas</h4>
+    <a href="{{ route('lineas.create') }}" class="btn btn-primary btn-sm">
+        <i class="bi bi-plus-lg me-1"></i>Nueva línea
     </a>
 </div>
 
@@ -23,22 +23,24 @@
                 <tr>
                     <th>#</th>
                     <th>Nombre</th>
-                    <th>Código</th>
+                    <th>Componente</th>
+                    <th>Área</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-            @forelse($sedes as $sede)
+            @forelse($lineas as $linea)
             <tr>
-                <td>{{ $sede->id_sede ?? $sede->id }}</td>
-                <td>{{ $sede->nombre }}</td>
-                <td>{{ $sede->codigo }}</td>
+                <td>{{ $linea->id_linea ?? $linea->id }}</td>
+                <td>{{ $linea->nombre }}</td>
+                <td>{{ $linea->componente->nombre ?? '' }}</td>
+                <td>{{ $linea->componente->area->nombre ?? '' }}</td>
                 <td>
-                    <a href="{{ route('sedes.edit', $sede) }}" class="btn btn-warning btn-sm">
+                    <a href="{{ route('lineas.edit', $linea) }}" class="btn btn-warning btn-sm">
                         <i class="bi bi-pencil"></i>
                     </a>
-                    <form action="{{ route('sedes.destroy', $sede) }}" method="POST" class="d-inline"
-                          onsubmit="return confirm('¿Eliminar esta sede?')">
+                    <form action="{{ route('lineas.destroy', $linea) }}" method="POST" class="d-inline"
+                          onsubmit="return confirm('¿Eliminar esta línea?')">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger btn-sm">
@@ -49,7 +51,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="4" class="text-center text-muted">Sin sedes registradas.</td>
+                <td colspan="5" class="text-center text-muted">Sin líneas registradas.</td>
             </tr>
             @endforelse
             </tbody>

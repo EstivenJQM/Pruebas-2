@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Sedes')
+@section('title', 'Tipos de Actividad')
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4><i class="bi bi-building me-2"></i>Sedes</h4>
-    <a href="{{ route('sedes.create') }}" class="btn btn-primary btn-sm">
-        <i class="bi bi-plus-lg me-1"></i>Nueva sede
+    <h4><i class="bi bi-list-check me-2"></i>Tipos de Actividad</h4>
+    <a href="{{ route('tipos_actividad.create') }}" class="btn btn-primary btn-sm">
+        <i class="bi bi-plus-lg me-1"></i>Nuevo tipo
     </a>
 </div>
 
@@ -23,22 +23,20 @@
                 <tr>
                     <th>#</th>
                     <th>Nombre</th>
-                    <th>Código</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-            @forelse($sedes as $sede)
+            @forelse($tipos as $tipo)
             <tr>
-                <td>{{ $sede->id_sede ?? $sede->id }}</td>
-                <td>{{ $sede->nombre }}</td>
-                <td>{{ $sede->codigo }}</td>
+                <td>{{ $tipo->id_tipo_actividad ?? $tipo->id }}</td>
+                <td>{{ $tipo->nombre }}</td>
                 <td>
-                    <a href="{{ route('sedes.edit', $sede) }}" class="btn btn-warning btn-sm">
+                    <a href="{{ route('tipos_actividad.edit', $tipo) }}" class="btn btn-warning btn-sm">
                         <i class="bi bi-pencil"></i>
                     </a>
-                    <form action="{{ route('sedes.destroy', $sede) }}" method="POST" class="d-inline"
-                          onsubmit="return confirm('¿Eliminar esta sede?')">
+                    <form action="{{ route('tipos_actividad.destroy', $tipo) }}" method="POST" class="d-inline"
+                          onsubmit="return confirm('¿Eliminar este tipo?')">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger btn-sm">
@@ -49,7 +47,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="4" class="text-center text-muted">Sin sedes registradas.</td>
+                <td colspan="3" class="text-center text-muted">Sin tipos registrados.</td>
             </tr>
             @endforelse
             </tbody>
